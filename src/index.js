@@ -19,7 +19,7 @@ async function run() {
 
         if (core.getInput('comment') && !teamPresent) {
             const comment = core.getInput('comment');
-            core.info(context.github)
+            core.info(context)
             const issueNumber = context.github.event.pull_request.number;
             if (comment.length > 0 && issueNumber != 0) {
                 const octokit = getOctokit(token);
