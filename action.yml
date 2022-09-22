@@ -13,11 +13,15 @@ inputs:
     description: 'A comment to post if the user is not part of the team.'
     required: false
     default: null
+  issue-number:
+    description: 'The issue where to post if the user is not part of the team.'
+    required: false
+    default: null
   organization:
     description: 'The organization of the team to check for. Defaults to the context organization.'
     required: false
     default: ${{ github.repository_owner }}
-  exit: 
+  exit:
     description: 'If the action should exit if the user is not part of the team.'
     required: false
     default: true

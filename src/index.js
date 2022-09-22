@@ -1,7 +1,6 @@
 import * as core from '@actions/core';
 import { context, getOctokit } from '@actions/github';
 import { getTeams } from './teamChecker';
-import { getPRId } from './getPRId'
 
 run();
 
@@ -18,10 +17,10 @@ async function run() {
         const teamPresent = teams.some(te => te.toLocaleLowerCase() == team);
         core.setOutput('permitted', teamPresent);
 
-        if (core.getInput('comment') && !teamPresent) {
+        if (core.getInput('comment') && core.getInput('issue-number') && !teamPresent) {
             const comment = core.getInput('comment');
             core.info(context)
-            const issueNumber = await getPRId(token);
+            const issueNumber = core.getInput('issue-number')
             if (comment.length > 0 && issueNumber != 0) {
                 const octokit = getOctokit(token);
                 const { owner, repo } = context.repo;
