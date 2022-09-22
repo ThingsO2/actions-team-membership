@@ -1,6 +1,7 @@
 import * as core from '@actions/core';
 import { context, getOctokit } from '@actions/github';
 import { getTeams } from './teamChecker';
+import { getPRId } from './getPRId'
 
 run();
 
@@ -20,7 +21,7 @@ async function run() {
         if (core.getInput('comment') && !teamPresent) {
             const comment = core.getInput('comment');
             core.info(context)
-            const issueNumber = context.github.event.pull_request.number;
+            const issueNumber = await getPRId(token);
             if (comment.length > 0 && issueNumber != 0) {
                 const octokit = getOctokit(token);
                 const { owner, repo } = context.repo;

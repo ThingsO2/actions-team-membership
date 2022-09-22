@@ -6,14 +6,14 @@ const query = `query($pg: String, $organization: String!, $userLogins: [String!]
         id
     }
     organization(login: $organization) {
-      teams (first:1, userLogins: $userLogins, after: $pg) { 
+      teams (first:1, userLogins: $userLogins, after: $pg) {
           nodes {
             name
         }
         pageInfo {
           hasNextPage
           endCursor
-        }        
+        }
       }
     }
 }`
@@ -42,4 +42,4 @@ const getTeams = async function(token, username) {
     return teams;
 }
 
-export { getTeams };
+export { getTeams }
