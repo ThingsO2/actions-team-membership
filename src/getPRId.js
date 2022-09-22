@@ -17,7 +17,7 @@ const query = `
 const getPRId = async function(token) {
     const octokit = getOctokit(token);
 
-    const data = await getClient().graphql(query, {
+    const data = await octokit.graphql(query, {
         name: context.repo.repo,
         owner: context.repo.owner,
         issue: context.issue.number,
