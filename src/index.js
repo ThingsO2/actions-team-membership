@@ -17,9 +17,10 @@ async function run() {
         const teamPresent = teams.some(te => te.toLocaleLowerCase() == team);
         core.setOutput('permitted', teamPresent);
 
-        if (core.getInput('comment') && !teamPresent) {
+        if (core.getInput('comment') && core.getInput('issue-number') && !teamPresent) {
             const comment = core.getInput('comment');
-            const issueNumber = context.pull_request.number;
+            core.info(context)
+            const issueNumber = core.getInput('issue-number')
             if (comment.length > 0 && issueNumber != 0) {
                 const octokit = getOctokit(token);
                 const { owner, repo } = context.repo;
